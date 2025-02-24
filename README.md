@@ -14,23 +14,23 @@ This documentation is made for Debian based systems
 
 first we install virtualvenv
 
-> pip install virtualenv
+> $ pip install virtualenv
 
 create a directory for the algoTrading bot
 
-> mkdir algoTrading
+> $ mkdir algoTrading
 > 
-> cd algoTrading
+> $ cd algoTrading
 
 next we need to create a virtual environment and source it
 
-> python -m venv algoVenv
+> $ python -m venv algoVenv
 > 
-> source /algoVenv/bin/activate
+> $ source /algoVenv/bin/activate
 
 Finally we need to install the required packages
 
-> pip install -r requirements.txt
+> $ pip install -r requirements.txt
 
 
 ### clone the repository 
