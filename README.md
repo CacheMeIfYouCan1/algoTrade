@@ -18,8 +18,7 @@ first we install virtualvenv
 
 create a directory for the algoTrading bot
 
-<code>
-$ mkdir algoTrading
+<code>$ mkdir algoTrading
  
 $ cd algoTrading
 </code>
