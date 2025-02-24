@@ -19,11 +19,13 @@ first we install virtualvenv
 create a directory for the algoTrading bot
 
 > mkdir algoTrading
+> 
 > cd algoTrading
 
 next we need to create a virtual environment and source it
 
 > python -m venv algoVenv
+> 
 > source /algoVenv/bin/activate
 
 Finally we need to install the required packages
