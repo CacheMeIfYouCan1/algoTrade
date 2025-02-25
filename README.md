@@ -83,7 +83,7 @@ This contains the dirctionaries which contains all variables that are needed wit
 | value_relations_dict['calculated_spread'] | calculated spread between best ask and bid |
 | value_relations_dict['calculated_price'] | price, calculated with bids and asks | 
 | value_relations_dict['oracle_calculated_price_difference'] | difference between the calculated and the oracle price |
-| value_relations_dict['ask_bid_size_factor'] | factor how much difference is between bids and asks in relation to the price |
+| value_relations_dict['ask_bid_size_factor'] | factor how much difference is between bids and asks sizes  |
 | value_relations_dict['acquired'] | used to keep track of manual lock/release |     
 | value_relations_dict['lock'] | used for locking |
 
@@ -118,7 +118,7 @@ this function takes the folllowing three arguments:
  3. value_relations_dict
 
 and determines the relation between the fetched data, to store it in the value_relations_dict. Therefore 
-market_data_dict and order_book_dict are accessed read-only and not written to. Both dictionaries should bot be locked, 
+market_data_dict and order_book_dict are accessed read-only and not written to. Both dictionaries should not be locked, 
 because the contained data is simultaneously fetched and written in getData.py while being read by value_relations.py. 
 Locking these dictionaries will therefore cause deadlocks. 
 
@@ -142,9 +142,19 @@ the values are estimated as following:
 | calculated_price | best_ask_price + best_bid_price / 2 |
 
 
-##### propagating lists
+##### estimating total size of asks and bids
 
-calc
+the task which is done, is simply to iterate through all content of our asks_list and bids_list at the size
+dimension and summing the values up. This is limited to the last 50 entries, since we only store 50 value pairs in the given 
+lists.
+
+##### estimating the relations between asks and bids
+
+finally we estimate the relation between the ask sizes and the bid sizes by dividing them. This will give us an overview
+if there are generally more aks or bid orders open in the orderbook, and how big this difference is. 
+
+#### update_best_bid_ask()
+
 
 
 
