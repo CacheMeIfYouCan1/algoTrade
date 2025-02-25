@@ -113,7 +113,7 @@ This class contains all functions which retrieve data and determine the relation
 
 
 
-#### <u>value_relations()</u>
+#### <ins>value_relations()</ins>
 
 this function takes the folllowing three arguments:
 
@@ -157,7 +157,7 @@ lists.
 finally we estimate the relation between the ask sizes and the bid sizes by dividing them. This will give us an overview
 if there are generally more aks or bid orders open in the orderbook, and how big this difference is. 
 
-#### <u>update_best_bid_ask()</u>
+#### <ins>update_best_bid_ask()</ins>
 
 
 
