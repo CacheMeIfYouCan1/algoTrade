@@ -231,3 +231,43 @@ The logical functionality consists of three tasks:
 See definition of Oracle price in context of crypto-trading. 
 
 
+------------------------------------------------------------------------------------------------
+
+
+### /algoTrade.py
+
+this script is used to start the algoTraging program and contains following functions:
+
+#### <ins>run_async_task():</ins>
+
+run_async_task takes the task and the corresponding dictionary as arguments. It is used to start asynchronous tasks within a process. 
+This is to merge and asynchronous approach with multiprocessing.
+
+#### <ins>algo_trade():</ins>
+
+Core function, this is used to start the programm. This is done by defining the processes and starting them, then afterwards 
+running an output which prints the necessary data from the different dictionaries inside an infinite loop. The processes
+are also gracefully shut down in case of error and keyboard interrupt. 
+
+In case of error, a recursion is implemented after the graceful shutdown. This is to restart all processes and avoid 
+zombies eating up all resources. 
+
+-----------------------------------------------------------------------------------------------
+
+## Usage:
+
+run this script within the previously created virtual environment with the following command:
+
+<code>python3 algoTrade.py <MARKET_TICKER></code>
+
+example: 
+
+<code>python3 algoTrade.py BTC-USD</code>
+
+
+
+
+
+
+
+
