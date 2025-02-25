@@ -14,7 +14,7 @@ This documentation is made for Debian based systems
 
 first we install virtualvenv
 
-<code> $ pip install virtualenv </code>
+<code>$ pip install virtualenv </code>
 
 create a directory for the algoTrading bot
 
@@ -46,8 +46,7 @@ Finally we need to install the required packages
 This contains the dirctionaries which contains all variables that are needed within the different classes. It is structured as following:
 
 #### market data dictionary
-<code>
-market_data_dict['market']                                       used to determine which market is being analyzed 
+<code>market_data_dict['market']                                       used to determine which market is being analyzed 
 market_data_dict['oracle_price']                                 stores oracle price as displayed by exchange
 market_data_dict['old_price']                                    stores the last oracle price before 
                                                                  the most recent price change
