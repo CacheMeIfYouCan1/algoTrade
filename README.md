@@ -87,23 +87,6 @@ This contains the dirctionaries which contains all variables that are needed wit
 | value_relations_dict['acquired'] | used to keep track of manual lock/release |     
 | value_relations_dict['lock'] | used for locking |
 
-#### dictionary for order management:                 
-| variable | Description |
-|----------|-------------|
-| order_management_dict['lot_size'] | size of current lot |
-| order_management_dict['order_id'] | order id of current order |
-| order_management_dict['order_side'] | side of current order |
-| order_management_dict['order_size'] | size of current order |
-| order_management_dict['order_price'] | execution price of current order |
-| order_management_dict['order_status'] | status of current order |
-| order_management_dict['close_order_id'] | id of closing order |
-| order_management_dict['close_order_side'] | side of closing order |
-| order_management_dict['close_order_size'] | size of closing order |
-| order_management_dict['close_order_price'] | execution price for closing order |
-| order_management_dict['close_order_status'] | close order status |
-| order_management_dict['acquired'] | used to keep track of manual lock/release |
-| order_management_dict['lock'] | used for locking |
-
 
 ------------------------------------------------------------------------------------------------
 
