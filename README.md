@@ -1,7 +1,7 @@
 # algoTrade
 
 
-<p><strong>Please note that this project is not a complete trading bot! The provided scripts are only a base foundation, which provides all necessary data, 
+<p><strong>Please note that this project is not a complete trading bot! The provided scripts are only a base foundation, which gathers all necessary data, 
  to build a profitable trading bot. The strategy which was built on top of this foundation will not be disclosed.</strong></p>
 
  
