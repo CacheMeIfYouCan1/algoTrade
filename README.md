@@ -265,6 +265,43 @@ example:
 <code>python3 algoTrade.py BTC-USD</code>
 
 
+-----------------------------------------------------------------------------------------------
+
+## Addendum:
+
+### what is missing? 
+
+As previously mentioned this is not a complete trading-bot. This is because its never a good idea to give away 
+working trading strategies by making them publicly available. So what would be needed to make it a complete trading-bot?
+
+On the technical side there could be many approaches. Personally I have added following functionality:
+
+### monitoring market and orders 
+
+two monitoring systems:
+
+one cosystem exists to monitor the given market conditions and screen them for certain patterns. 
+As soon as the patterns are present, orders are opened.
+
+the other monitors the open orders and adjusts or cancels them if necessary.
+This is getting signals from the market monitoring system
+
+### execution of orders:
+
+there are 2 key functionalities when it comes to execution of orders, opening and cancelling. But to be trading succesfully an algorithm
+needs to be a little more versatile on how to open or close orders. Key questions have been for me:
+
+ - what type of order am I opening (Maker, Taker, Fill or Kill) in which situations?
+ - how long should the order stay open?
+ - what should the closing value be?
+ - in which cases does the closing value needs to be altered? (trailing stop)
+ - how should my stop loss strategy be?
+
+All these functions need to be implemented in the execution part of the trading-bot.
+
+ 
+
+
 
 
 
