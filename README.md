@@ -45,27 +45,16 @@ Finally we need to install the required packages
 
 This contains the dirctionaries which contains all variables that are needed within the different classes. It is structured as following:
 
-#### market data dictionary
-##### market_data_dict['market']
-used to determine which market is being analyzed 
-
-##### market_data_dict['oracle_price']
-stores oracle price as displayed by exchange
-
-##### market_data_dict['old_price']
-stores the last oracle price before the most recent price change
-
-##### market_data_dict['base_price']
-stores the last oracle price fetched
-
-##### market_data_dict['change_factor']
-factor determining how much the price has changed 
-
-##### market_data_dict['acquired']
-used to keep track of manual lock/release
-
-##### market_data_dict['lock']
-used for locking
+#### market data dictionary 
+| Variable | Description |
+|----------------------------|-----------------------|
+| market_data_dict['market'] | used to determine which market is being analyzed |
+| market_data_dict['oracle_price'] | stores oracle price as displayed by exchange |
+| market_data_dict['old_price'] | stores the last oracle price before the most recent price change |
+| market_data_dict['base_price'] | stores the last oracle price fetched |
+| market_data_dict['change_factor'] | factor determining how much the price has changed |
+| market_data_dict['acquired'] | used to keep track of manual lock/release
+| market_data_dict['lock'] | used for locking
 
 
 #### order book data dictionary
