@@ -105,6 +105,50 @@ This contains the dirctionaries which contains all variables that are needed wit
 | order_management_dict['lock'] | used for locking |
 
 
+### getData/getData.py
+
+This class contains all functions which retrieve data and determine the relations between the retrieved data.
+
+#### value_relations()
+
+this function takes the folllowing three arguments:
+
+ 1. market_data_dict
+ 2. order_book_dict
+ 3. value_relations_dict
+
+and determines the relation between the fetched data, to store it in the value_relations_dict. Therefore 
+market_data_dict and order_book_dict are accessed read-only and not written to. Both dictionaries should bot be locked, 
+because the contained data is simultaneously fetched and written in getData.py while being read by value_relations.py. 
+Locking these dictionaries will therefore cause deadlocks. 
+
+This has one minor flaw: the data which is used to calculate the relations between the values can lag behind. This
+flaw an be neglected, because the relations express speculative tendencies instead of absolute states, since the 
+fetched data is also speculative and will fluctuated based on the exchange used as a data source.
+
+value_relations executes three tasks:
+
+##### estimating the relations of fetched data
+
+<code>with value_relations_dict['lock']
+					value_relations_dict['oracle_calculated_price_difference'] = Decimal(value_relations_dict['calculated_price'])/Decimal(market_data_dict['base_price'])
+					value_relations_dict['calculated_spread'] = (Decimal(order_book_dict['best_ask_price'])/Decimal(order_book_dict['best_bid_price']))*100-100
+					value_relations_dict['calculated_price'] = (Decimal(order_book_dict['best_ask_price'])+Decimal(order_book_dict['best_bid_price']))/2
+</code>
+
+here we estimate the oracle_calculated_price_difference, calculated_spread and the calculated_price and propagate the corresponding variables in the dictionary.
+
+##### propagating lists
+
+<code>if len(order_book_dict['asks_list']) >= 50:
+					value_relations_dict['total_size_asks'] = sum(Decimal(order_book_dict['asks_list'][i]) for i in range(min(len(order_book_dict['asks_list']), 50)))
+					order_book_dict['asks_list'].pop(0)
+					
+				if len(order_book_dict['bids_list']) >= 50:
+					value_relations_dict['total_size_bids'] = sum(Decimal(order_book_dict['bids_list'][i]) for i in range(min(len(order_book_dict['bids_list']), 50)))
+					order_book_dict['bids_list'].pop(0)
+</code>
+
 
 
 
