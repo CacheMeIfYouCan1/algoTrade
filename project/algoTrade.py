@@ -24,7 +24,7 @@ def run_async_task(async_func, shared_dict):
 	loop = asyncio.get_event_loop()
 	loop.run_until_complete(async_func(shared_dict))
 
-def algoTrade(market_data_dict, order_book_dict, value_relations_dict):
+def algo_trade(market_data_dict, order_book_dict, value_relations_dict):
 
 	get_data_instance = get_data()
 	
@@ -109,14 +109,14 @@ def algoTrade(market_data_dict, order_book_dict, value_relations_dict):
 
 			print("error: ", error)
 			print("continuing")
-			algoTrade(market_data_dict, order_book_dict, value_relations_dict, order_management_dict)
+			algo_trade(market_data_dict, order_book_dict, value_relations_dict, order_management_dict)
 
 def main():
 
 	market_data_dict['market'] = market
 	order_book_dict['market'] = market
 	order_management_dict['lot_size'] = lot_size
-	algoTrade(market_data_dict, order_book_dict, value_relations_dict)
+	algo_trade(market_data_dict, order_book_dict, value_relations_dict)
 
 if __name__ == "__main__":
 	main()
