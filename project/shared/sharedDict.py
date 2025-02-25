@@ -8,7 +8,7 @@ manager = multiprocessing.Manager()
 market_data_dict = manager.dict()
 order_book_dict = manager.dict()
 value_relations_dict = manager.dict()
-order_management_dict = manager.dict()
+
 
 
 #dict for market data
@@ -47,21 +47,4 @@ value_relations_dict['oracle_calculated_price_difference'] = 0
 value_relations_dict['ask_bid_size_factor'] = 0
 value_relations_dict['acquired'] = False
 value_relations_dict['lock'] = manager.Lock()
-
-#dict for order management
-
-order_management_dict['lot_size'] = 'NONE'
-order_management_dict['order_id'] = 'NONE'
-order_management_dict['order_side'] = 'NONE'
-order_management_dict['order_size'] = Decimal(0)
-order_management_dict['order_price'] = Decimal(0)
-order_management_dict['order_status'] = 'NONE'
-order_management_dict['close_order_id'] = 'NONE'
-order_management_dict['close_order_side'] = 'NONE'
-order_management_dict['close_order_size'] = Decimal(0)
-order_management_dict['close_order_price'] = Decimal(0)
-order_management_dict['close_order_status'] = 'NONE'
-order_management_dict['debug'] = 'NONE'
-order_management_dict['acquired'] = False
-order_management_dict['lock'] = manager.Lock()
 
