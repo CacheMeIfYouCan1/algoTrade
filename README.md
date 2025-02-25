@@ -41,11 +41,11 @@ Finally we need to install the required packages
 
 ## Documentation
 
-### shared/sharedDict.py
+### shared/sharedDict.py:
 
 This contains the dirctionaries which contains all variables that are needed within the different classes. It is structured as following:
 
-#### market data dictionary 
+#### market data dictionary :
 | Variable | Description |
 |----------------------------|-----------------------|
 | market_data_dict['market'] | used to determine which market is being analyzed |
@@ -57,7 +57,7 @@ This contains the dirctionaries which contains all variables that are needed wit
 | market_data_dict['lock'] | used for locking |
 
 
-#### order book data dictionary
+#### order book data dictionary:
 | variable | Description |
 |----------|-------------|
 | order_book_dict['market'] | used to determine which market is being analyzed | 
@@ -75,7 +75,7 @@ This contains the dirctionaries which contains all variables that are needed wit
 | order_book_dict['lock'] | used for locking |
 
 
-#### dictionary to keep track of relations between values
+#### dictionary to keep track of relations between values:
 | variable | Description |
 |----------|-------------|
 | value_relations_dict['total_size_asks'] | sum of the last x ask sizes |
@@ -87,7 +87,7 @@ This contains the dirctionaries which contains all variables that are needed wit
 | value_relations_dict['acquired'] | used to keep track of manual lock/release |     
 | value_relations_dict['lock'] | used for locking |
 
-#### dictionary for order management                  
+#### dictionary for order management:                 
 | variable | Description |
 |----------|-------------|
 | order_management_dict['lot_size'] | size of current lot |
@@ -107,13 +107,14 @@ This contains the dirctionaries which contains all variables that are needed wit
 
 ------------------------------------------------------------------------------------------------
 
-### getData/getData.py
+### getData/getData.py:
 
 This class contains all functions which retrieve data and determine the relations between the retrieved data.
+Most functions are running within an infinite loop and a recursion is implemented in case of error, through a try-catch block.
+This is to ensure that the processes are always running.
 
 
-
-#### <ins>value_relations()</ins>
+#### <ins>value_relations():</ins>
 
 this function takes the folllowing three arguments:
 
@@ -132,7 +133,7 @@ fetched data is also speculative and will fluctuated based on the exchange used 
 
 value_relations executes three tasks:
 
-##### estimating the relations of fetched data
+##### estimating the relations of fetched data:
 
 In the first part of the function, we estimate the oracle_calculated_price_difference, calculated_spread and 
 the calculated_price and propagate the corresponding variables in the dictionary, while it is locked, to avoid deadlocks.
@@ -146,21 +147,52 @@ the values are estimated as following:
 | calculated_price | best_ask_price + best_bid_price / 2 |
 
 
-##### estimating total size of asks and bids
+##### estimating total size of asks and bids:
 
 the task which is done, is simply to iterate through all content of our asks_list and bids_list at the size
 dimension and summing the values up. This is limited to the last 50 entries, since we only store 50 value pairs in the given 
 lists.
 
-##### estimating the relations between asks and bids
+##### estimating the relations between asks and bids:
 
 finally we estimate the relation between the ask sizes and the bid sizes by dividing them. This will give us an overview
 if there are generally more aks or bid orders open in the orderbook, and how big this difference is. 
 
-#### <ins>update_best_bid_ask()</ins>
+#### <ins>update_best_bid_ask():</ins>
 
+The function takes three arguments:
 
+ 1. order_book_dict
+ 2. bids
+ 3. asks
 
+It propagates order_book_dict with the highes bid and the lowest ask, together with their corresponding size. It is not 
+necessary to lock the dictionary, because these variables are set nowhere else. Locking the dictionary at this point 
+without checking if its locked already could cause deadlocks.
+
+#### <ins>get_order_data()</ins>
+
+get_order_data takes only the order_book_dict as an argument. The function is designed to fetch the order book data from
+the exchange and propagate the dictionary with all relevant data. 
+
+##### key considerations:
+
+Its important to consider that the data is fetched as a stream, which is why the socket connection needs to be established 
+before the infinite while loop. This is to ensure that there is only one socket connection open, which fetches
+the data stream. Its also important to lock the order_book_dict at this point, to avoid race-conditions.
+
+The data is fetched as a two dimensional array and consists of the bid/ask value and the corresponding size of the order.
+Datasets can be either ask or bid data, every dataset represents one open order. 
+
+All fetched orders are open at the time when they are fetched. Some orders contain the size '0', they are filtered out
+as they would interfere with the estimation of the value relations.
+
+##### limitations:
+
+The fetched orders are open at the time when they are received, we do not know when they get filled, cancelled or when they 
+do expire. 
+
+Orders which are immediately filled, do not appear in the orderbook.
 
 
 
