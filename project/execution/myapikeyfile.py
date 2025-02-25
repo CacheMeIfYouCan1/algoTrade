@@ -1,1 +1,0 @@
-DYDX_TEST_MNEMONIC = ' '
