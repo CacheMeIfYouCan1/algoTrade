@@ -115,7 +115,7 @@ def main():
 
 	market_data_dict['market'] = market
 	order_book_dict['market'] = market
-	order_management_dict['lot_size'] = lot_size
+	
 	algo_trade(market_data_dict, order_book_dict, value_relations_dict)
 
 if __name__ == "__main__":
