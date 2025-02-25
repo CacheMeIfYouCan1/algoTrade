@@ -17,10 +17,10 @@ class get_data:
 		while True:
 			try:
 				#only locking value_relations_dict to avoid deadlocks, is fine since order_book_dict is readonly
-				with value_relations_dict['lock']
+				with value_relations_dict['lock']:
+					value_relations_dict['calculated_price'] = (Decimal(order_book_dict['best_ask_price'])+Decimal(order_book_dict['best_bid_price']))/2
 					value_relations_dict['oracle_calculated_price_difference'] = Decimal(value_relations_dict['calculated_price'])/Decimal(market_data_dict['base_price'])
 					value_relations_dict['calculated_spread']= (Decimal(order_book_dict['best_ask_price'])/Decimal(order_book_dict['best_bid_price']))*100-100
-					value_relations_dict['calculated_price'] = (Decimal(order_book_dict['best_ask_price'])+Decimal(order_book_dict['best_bid_price']))/2
 
 				
 				if len(order_book_dict['asks_list']) >= 50:
