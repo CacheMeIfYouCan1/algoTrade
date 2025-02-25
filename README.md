@@ -46,18 +46,24 @@ Finally we need to install the required packages
 This contains the dirctionaries which contains all variables that are needed within the different classes. It is structured as following:
 
 #### market data dictionary
-<code>market_data_dict['market']                                       used to determine which market is being analyzed 
-market_data_dict['oracle_price']                                 stores oracle price as displayed by exchange
-market_data_dict['old_price']                                    stores the last oracle price before 
-                                                                 the most recent price change
-market_data_dict['base_price']                                   stores the last oracle price fetched
-market_data_dict['change_factor']                                a factor determining how much the price has changed 
-market_data_dict['acquired']                                     used to keep track of manual lock/release
-market_data_dict['lock']                                         used for locking
-</code>
+>market_data_dict['market']
+used to determine which market is being analyzed 
+>market_data_dict['oracle_price']
+stores oracle price as displayed by exchange
+>market_data_dict['old_price']
+stores the last oracle price before the most recent price change
+>market_data_dict['base_price']
+stores the last oracle price fetched
+>market_data_dict['change_factor']
+a factor determining how much the price has changed 
+>market_data_dict['acquired']
+used to keep track of manual lock/release
+>market_data_dict['lock']
+used for locking
+
 
 #### order book data dictionary
-<code>order_book_dict['market']                                         used to determine which market is being analyzed 
+order_book_dict['market']                                         used to determine which market is being analyzed 
 order_book_dict['current_ask_price']                              last fetched ask price
 order_book_dict['current_ask_size']                               size of the last fetched ask order
 order_book_dict['current_bid_price']                              last bid price
@@ -70,10 +76,10 @@ order_book_dict['asks_list']                                      list containin
 order_book_dict['bids_list']                                      list containing bid price and size
 order_book_dict['acquired']                                       used to keep track of manual lock/release
 order_book_dict['lock']                                           used for locking
-</code>
+
 
 #### dictionary to keep track of relations between values
-<code>value_relations_dict['total_size_asks']                           sum of the last x ask sizes
+value_relations_dict['total_size_asks']                           sum of the last x ask sizes
 value_relations_dict['total_size_bids']                           sum of the last x bid sizes        
 value_relations_dict['calculated_spread']                         calculated spread between best ask and bid
 value_relations_dict['calculated_price']                          price, calculated with bids and asks 
@@ -82,10 +88,10 @@ value_relations_dict['ask_bid_size_factor']                       factor how muc
                                                                   and asks in relation to the price
 value_relations_dict['acquired']                                  used to keep track of manual lock/release     
 value_relations_dict['lock']                                      used for locking
-</code>
+
 
 #### dictionary for order management                  
-<code>order_management_dict['lot_size']                                 size of current lot
+order_management_dict['lot_size']                                 size of current lot
 order_management_dict['order_id']                                 order id of current order
 order_management_dict['order_side']                               side of current order
 order_management_dict['order_size']                               size of current order
@@ -98,7 +104,7 @@ order_management_dict['close_order_price']                        execution pric
 order_management_dict['close_order_status']                       close order status
 order_management_dict['acquired']                                 used to keep track of manual lock/release
 order_management_dict['lock']                                     used for locking
-</code>
+
 
 
 
