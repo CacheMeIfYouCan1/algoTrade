@@ -11,40 +11,31 @@ import time
 from collections import deque
 import multiprocessing
 
-from execution.execution import execution
 from getData.getData import get_data
-from monitoring.monitoring import monitoring
-from shared.sharedDict import order_management_dict, market_data_dict, value_relations_dict, order_book_dict
+from shared.sharedDict import market_data_dict, value_relations_dict, order_book_dict
 
 getcontext().prec = 20
 
 market = sys.argv[1]
-lot_size = sys.argv[2]
+
 
 def run_async_task(async_func, shared_dict):
 	
 	loop = asyncio.get_event_loop()
 	loop.run_until_complete(async_func(shared_dict))
 
-def algoTrade(market_data_dict, order_book_dict, value_relations_dict, order_management_dict):
+def algoTrade(market_data_dict, order_book_dict, value_relations_dict):
 
 	get_data_instance = get_data()
-	monitoring_instance = monitoring()
 	
 	process_get_market_data = multiprocessing.Process(target=run_async_task, args=(get_data_instance.get_market_data, market_data_dict))
 	process_get_order_data = multiprocessing.Process(target=run_async_task, args=(get_data_instance.get_order_data, order_book_dict))
 	process_value_relations = multiprocessing.Process(target=get_data_instance.value_relations, args=(market_data_dict, order_book_dict, value_relations_dict))
-	process_monitoring_market_flow = multiprocessing.Process(target=monitoring_instance.monitoring_market_flow, args=(value_relations_dict, order_book_dict, order_management_dict))
-	process_monitoring_order = multiprocessing.Process(target=monitoring_instance.monitoring_order, args=(order_management_dict,))
-	process_monitoring_close_order = multiprocessing.Process(target=monitoring_instance.monitoring_close_order, args=(order_management_dict,))
 	
 	process_get_market_data.start()
 	process_get_order_data.start()
 	process_value_relations.start()
-	process_monitoring_market_flow.start()
-	process_monitoring_order.start()
-	process_monitoring_close_order.start()
-
+	
 	while True:	
 		try:	
 			print(" ")
@@ -96,17 +87,11 @@ def algoTrade(market_data_dict, order_book_dict, value_relations_dict, order_man
 			process_get_market_data.terminate()
 			process_get_order_data.terminate()
 			process_value_relations.terminate()
-			process_monitoring_market_flow.terminate()
-			process_monitoring_order.terminate()
-			process_monitoring_close_order.terminate()
-			
+
 			process_get_market_data.join()
 			process_get_order_data.join()	
 			process_value_relations.join()
-			process_monitoring_market_flow.join()
-			process_monitoring_order.join()
-			process_monitoring_close_order.join()
-			
+
 			sys.exit("Keyboard interrupt")
 
 					
@@ -117,16 +102,10 @@ def algoTrade(market_data_dict, order_book_dict, value_relations_dict, order_man
 			process_get_market_data.terminate()
 			process_get_order_data.terminate()
 			process_value_relations.terminate()
-			process_monitoring_market_flow.terminate()
-			process_monitoring_order.terminate()
-			process_monitoring_close_order.terminate()
 
 			process_get_market_data.join()
 			process_get_order_data.join()	
 			process_value_relations.join()
-			process_monitoring_market_flow.join()
-			process_monitoring_order.join()
-			process_monitoring_close_order.join()
 
 			print("error: ", error)
 			print("continuing")
@@ -137,7 +116,7 @@ def main():
 	market_data_dict['market'] = market
 	order_book_dict['market'] = market
 	order_management_dict['lot_size'] = lot_size
-	algoTrade(market_data_dict, order_book_dict, value_relations_dict, order_management_dict)
+	algoTrade(market_data_dict, order_book_dict, value_relations_dict)
 
 if __name__ == "__main__":
 	main()
