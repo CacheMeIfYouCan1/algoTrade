@@ -21,12 +21,32 @@ getcontext().prec = 20
 market = sys.argv[1]
 lot_size = sys.argv[2]
 
+def run_async_task(async_func, shared_dict):
+	
+	loop = asyncio.get_event_loop()
+	loop.run_until_complete(async_func(shared_dict))
 
+def algoTrade(market_data_dict, order_book_dict, value_relations_dict, order_management_dict):
 
-def output(market_data_dict, order_book_dict, value_relations_dict, order_management_dict):
+	get_data_instance = get_data()
+	monitoring_instance = monitoring()
+	
+	process_get_market_data = multiprocessing.Process(target=run_async_task, args=(get_data_instance.get_market_data, market_data_dict))
+	process_get_order_data = multiprocessing.Process(target=run_async_task, args=(get_data_instance.get_order_data, order_book_dict))
+	process_value_relations = multiprocessing.Process(target=get_data_instance.value_relations, args=(market_data_dict, order_book_dict, value_relations_dict))
+	process_monitoring_market_flow = multiprocessing.Process(target=monitoring_instance.monitoring_market_flow, args=(value_relations_dict, order_book_dict, order_management_dict))
+	process_monitoring_order = multiprocessing.Process(target=monitoring_instance.monitoring_order, args=(order_management_dict,))
+	process_monitoring_close_order = multiprocessing.Process(target=monitoring_instance.monitoring_close_order, args=(order_management_dict,))
+	
+	process_get_market_data.start()
+	process_get_order_data.start()
+	process_value_relations.start()
+	process_monitoring_market_flow.start()
+	process_monitoring_order.start()
+	process_monitoring_close_order.start()
 
-	while True:
-		try:
+	while True:	
+		try:	
 			print(" ")
 			print(" ")
 			print("#####################")
@@ -66,46 +86,8 @@ def output(market_data_dict, order_book_dict, value_relations_dict, order_manage
 			print("close order status: ", order_management_dict['close_order_status'])
 			print("close order id: ", order_management_dict['close_order_id'])
 
-			time.sleep(1.5) # sleep 1.5 secs for better readability of output
-
-		except KeyboardInterrupt:
-			sys.exit("Keyboard interrupt")
-
-		except Exception as error:
-			print("error: ", error)
-			print("continuing")
-			output(market_data_dict, order_book_dict, value_relations_dict, order_management_dict)
-
-def run_async_task(async_func, shared_dict):
-	
-	loop = asyncio.get_event_loop()
-	loop.run_until_complete(async_func(shared_dict))
-
-def algoTrade(market_data_dict, order_book_dict, value_relations_dict, order_management_dict):
-
-	get_data_instance = get_data()
-	monitoring_instance = monitoring()
-	
-	process_get_market_data = multiprocessing.Process(target=run_async_task, args=(get_data_instance.get_market_data, market_data_dict))
-	process_get_order_data = multiprocessing.Process(target=run_async_task, args=(get_data_instance.get_order_data, order_book_dict))
-	process_value_relations = multiprocessing.Process(target=get_data_instance.value_relations, args=(market_data_dict, order_book_dict, value_relations_dict))
-	process_monitoring_market_flow = multiprocessing.Process(target=monitoring_instance.monitoring_market_flow, args=(value_relations_dict, order_book_dict, order_management_dict))
-	process_monitoring_order = multiprocessing.Process(target=monitoring_instance.monitoring_order, args=(order_management_dict,))
-	process_monitoring_close_order = multiprocessing.Process(target=monitoring_instance.monitoring_close_order, args=(order_management_dict,))
-	
-	process_get_market_data.start()
-	process_get_order_data.start()
-	process_value_relations.start()
-	process_monitoring_market_flow.start()
-	process_monitoring_order.start()
-	process_monitoring_close_order.start()
-
-
-
-	while True:	
-		try:	
-			output(market_data_dict, order_book_dict, value_relations_dict, order_management_dict)
-			time.sleep(1)
+			time.sleep(2.5) # sleep 2.5 secs for better readability of output
+			
 
 		except KeyboardInterrupt:
 			websocket_order.close()
