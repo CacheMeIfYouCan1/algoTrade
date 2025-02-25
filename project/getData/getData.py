@@ -89,7 +89,7 @@ class get_data:
 										order_book_dict['current_bid_size'] = current_bid[1]
 										if Decimal(order_book_dict['current_bid_size']) >= 0.000001:
 											order_book_dict['bids_list'].append(Decimal(order_book_dict['current_bid_size']))
-										self.update_best_bid_ask(order_book_dict, bids, asks)
+											self.update_best_bid_ask(order_book_dict, bids, asks)
 													
 							if 'price' in asks:
 									print(asks)
@@ -103,7 +103,7 @@ class get_data:
 										order_book_dict['current_ask_size'] = current_ask[1]
 										if Decimal(order_book_dict['current_ask_size']) >= 0.000001:
 											order_book_dict['asks_list'].append(Decimal(order_book_dict['current_ask_size']))
-										self.update_best_bid_ask(order_book_dict, bids, asks)
+											self.update_best_bid_ask(order_book_dict, bids, asks)
 
 				except KeyboardInterrupt:
 					websocket_order.close()			
