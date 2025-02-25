@@ -130,24 +130,21 @@ value_relations executes three tasks:
 
 ##### estimating the relations of fetched data
 
-<code>with value_relations_dict['lock']
-					value_relations_dict['oracle_calculated_price_difference'] = Decimal(value_relations_dict['calculated_price'])/Decimal(market_data_dict['base_price'])
-					value_relations_dict['calculated_spread'] = (Decimal(order_book_dict['best_ask_price'])/Decimal(order_book_dict['best_bid_price']))*100-100
-					value_relations_dict['calculated_price'] = (Decimal(order_book_dict['best_ask_price'])+Decimal(order_book_dict['best_bid_price']))/2
-</code>
+In the first part of the function, we estimate the oracle_calculated_price_difference, calculated_spread and 
+the calculated_price and propagate the corresponding variables in the dictionary, while it is locked, to avoid deadlocks.
 
-here we estimate the oracle_calculated_price_difference, calculated_spread and the calculated_price and propagate the corresponding variables in the dictionary.
+the values are estimated as following:
+
+| value | estimation |
+|-------|------------|
+| oracle_calculated_price_difference | calculated_price / base_price |
+| calculated_spread | best_ask_price / best_bid_price * 100 - 100 |
+| calculated_price | best_ask_price + best_bid_price / 2 |
+
 
 ##### propagating lists
 
-<code>if len(order_book_dict['asks_list']) >= 50:
-					value_relations_dict['total_size_asks'] = sum(Decimal(order_book_dict['asks_list'][i]) for i in range(min(len(order_book_dict['asks_list']), 50)))
-					order_book_dict['asks_list'].pop(0)
-					
-				if len(order_book_dict['bids_list']) >= 50:
-					value_relations_dict['total_size_bids'] = sum(Decimal(order_book_dict['bids_list'][i]) for i in range(min(len(order_book_dict['bids_list']), 50)))
-					order_book_dict['bids_list'].pop(0)
-</code>
+calc
 
 
 
