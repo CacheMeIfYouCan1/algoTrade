@@ -1,4 +1,4 @@
-from shared.sharedDict import order_management_dict, market_data_dict, value_relations_dict, order_book_dict
+from shared.sharedDict import market_data_dict, value_relations_dict, order_book_dict
 from monitoring.monitoring import monitoring
 
 import json
