@@ -1,10 +1,10 @@
 # algoTrade
 
 
-<p><strong>Please note that the financial markets are very competitional. Therefore several parts, which would give away the market edge, were removed.</strong></p>
+<p><strong>Please note that this project is not a complete trading bot! The provided scripts are only a base foundation, which provides all necessary data, 
+ to build a profitable trading bot. The strategy which was built on top of this foundation will not be disclosed.</strong></p>
 
-
-This is a fully automated cryptotrading algorithm, a private long-term project which is currently profitably trading BTC/USD and DOGE/USD on the DYDX exchange. This project is showcased to display understanding for modular python projects, as well as websockets, asynchronous programming, multiprocessing and the usage of shared dictionaries while avoiding race conditions and deadlocks. 
+ 
 
 This documentation is made for Debian based systems
 
@@ -170,10 +170,10 @@ It propagates order_book_dict with the highes bid and the lowest ask, together w
 necessary to lock the dictionary, because these variables are set nowhere else. Locking the dictionary at this point 
 without checking if its locked already could cause deadlocks.
 
-#### <ins>get_order_data()</ins>
+#### <ins>get_order_data():</ins>
 
 get_order_data takes only the order_book_dict as an argument. The function is designed to fetch the order book data from
-the exchange and propagate the dictionary with all relevant data. 
+the exchange and propagate the dictionary with all relevant data, while cutting out the noise. 
 
 ##### key considerations:
 
@@ -181,11 +181,19 @@ Its important to consider that the data is fetched as a stream, which is why the
 before the infinite while loop. This is to ensure that there is only one socket connection open, which fetches
 the data stream. Its also important to lock the order_book_dict at this point, to avoid race-conditions.
 
-The data is fetched as a two dimensional array and consists of the bid/ask value and the corresponding size of the order.
-Datasets can be either ask or bid data, every dataset represents one open order. 
+The data is fetched in json format and the relevant fields are stored as a two dimensional array, which consists of the bid/ask value 
+and the corresponding size of the order. Datasets can be either ask or bid data, every dataset represents one open order. 
+
+Unfortunately the fetched data seems to be corrupted sometimes, We can validate that by checking if the dataset contains 'price'.
 
 All fetched orders are open at the time when they are fetched. Some orders contain the size '0', they are filtered out
 as they would interfere with the estimation of the value relations.
+
+##### functionality:
+the logic is simple and can be summarized as following:
+
+If a bid or ask order is present, the values are stored in the the dictionary. If their size is bigger than 0,
+their value will be appended to the corresponding list and the best bid/ask price is updated.
 
 ##### limitations:
 
@@ -194,5 +202,32 @@ do expire.
 
 Orders which are immediately filled, do not appear in the orderbook.
 
+#### <ins>get_market_data()</ins>
+
+get_market_data takes only the market_data_dict as an argument. This function is built to fetch the market data from the 
+exchange and propagate the dictionary with all relevant data, while cutting out the noise. 
+
+##### key_considerations: 
+
+unlike the order book data, the market data is not fetched as a stream. This is why we want to open and close the websocket 
+within the infinite while-loop. It is important to lock the market data, to avoid race conditions. 
+
+The market data is fetched in json format. For the currently used trading style, the only relevant field within the market data
+is the oracle price. 
+
+Unfortunately the fetched data seems to be corrupted sometimes, We can validate that by checking if all necessary party are present 
+in the json. The fetched data comes in two responses and its necessary to iterate through both.
+
+##### functionality:
+
+The logical functionality consists of three tasks:
+
+1. store the oracle price in the dictionary
+2. determine if the price has changed and
+3. estimate the factor of the recent price change
+
+##### limitations:
+
+See definition of Oracle price in context of crypto-trading. 
 
 
