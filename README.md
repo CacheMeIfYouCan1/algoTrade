@@ -105,12 +105,16 @@ This contains the dirctionaries which contains all variables that are needed wit
 | order_management_dict['lock'] | used for locking |
 
 
+------------------------------------------------------------------------------------------------
+
 ### getData/getData.py
 
 This class contains all functions which retrieve data and determine the relations between the retrieved data.
 
+
+
 #### value_relations()
-======================
+
 this function takes the folllowing three arguments:
 
  1. market_data_dict
@@ -154,7 +158,7 @@ finally we estimate the relation between the ask sizes and the bid sizes by divi
 if there are generally more aks or bid orders open in the orderbook, and how big this difference is. 
 
 #### update_best_bid_ask()
-==========================
+
 
 
 
