@@ -26,7 +26,7 @@ next we need to create a virtual environment and source it
 
 <code>$ python3 -m venv algoVenv</code>
  
-<code>$ source /algoVenv/bin/activate</code>
+<code>$ source algoVenv/bin/activate</code>
 
 clone the repository and install the required components
 
