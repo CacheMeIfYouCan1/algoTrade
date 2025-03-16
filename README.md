@@ -40,7 +40,7 @@ clone the repository and install the required components
 
 now you can start the trading bot by running python3 algoTrade.py <TICKER>
 
-here is a small example:
+here is an example:
 
 <code> $ python3 algoTrade.py BTC-USD </code>
 ## Documentation
