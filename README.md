@@ -109,7 +109,7 @@ This contains the dirctionaries which contains all variables that are needed wit
 
 ------------------------------------------------------------------------------------------------
 
-### scripts
+### Scripts
 
 ### getData/getData.py:
 
