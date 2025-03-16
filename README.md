@@ -38,11 +38,8 @@ clone the repository and install the required components
 
 <code> $ pip install -r requirements.txt </code>
 
-now you can start the trading bot by running python3 algoTrade.py TICKER
+now the project is set up 
 
-here is an example:
-
-<code> $ python3 algoTrade.py BTC-USD </code>
 ## Documentation
 
 ### shared/sharedDict.py:
