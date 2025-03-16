@@ -30,13 +30,17 @@ next we need to create a virtual environment and source it
 
 clone the repository and install the required components
 
-<code> git clone https://github.com/CacheMeIfYouCan1/algoTrade/ </code>
+<code> $ git clone https://github.com/CacheMeIfYouCan1/algoTrade/ </code>
 
 <code> $ cd algoTrade</code>
 
 <code> $ cd project </code>
 
 <code> $ pip install -r requirements.txt </code>
+
+now you can start the trading bot by running python3 algoTrade.py <TICKER>
+
+here is a small example:
 
 <code> $ python3 algoTrade.py BTC-USD </code>
 ## Documentation
