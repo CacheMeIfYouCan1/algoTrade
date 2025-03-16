@@ -272,6 +272,13 @@ example:
 
 -----------------------------------------------------------------------------------------------
 
+## License:
+
+The software is dedicated to the public domain under the Creative Commons Zero (CC0) License.
+
+
+-----------------------------------------------------------------------------------------------
+
 ## Addendum:
 
 ### what is missing? 
@@ -304,9 +311,6 @@ needs to be a little more versatile on how to open or close orders. Key question
 
 All these functions need to be implemented in the execution part of the trading-bot.
 
-## License
-
-The software is dedicated to the public domain under the Creative Commons Zero (CC0) License.
 
 
 
