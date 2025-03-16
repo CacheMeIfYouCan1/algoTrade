@@ -28,16 +28,15 @@ next we need to create a virtual environment and source it
  
 <code>$ source /algoVenv/bin/activate</code>
 
-
-Finally we need to install the required packages
-
-<code> $ pip install -r requirements.txt </code>
-
-
-### clone the repository 
+clone the repository and install the required components
 
 <code> git clone https://github.com/CacheMeIfYouCan1/algoTrade/ </code>
 
+<code> $ cd algoTrade</code>
+
+<code> $ cd project </code>
+
+<code> $ pip install -r requirements.txt </code>
 
 ## Documentation
 
