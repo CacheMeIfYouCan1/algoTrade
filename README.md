@@ -38,7 +38,7 @@ clone the repository and install the required components
 
 <code> $ pip install -r requirements.txt </code>
 
-now you can start the trading bot by running python3 algoTrade.py <TICKER>
+now you can start the trading bot by running python3 algoTrade.py TICKER
 
 here is an example:
 
