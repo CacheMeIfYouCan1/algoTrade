@@ -11,6 +11,7 @@
    2. [Logic](#Logic)
 4. [Usage](#Usage)
 5. [License](#license)
+6. [Addendum][#Addendum]
 
 ## Introduction
 
@@ -303,7 +304,10 @@ needs to be a little more versatile on how to open or close orders. Key question
 
 All these functions need to be implemented in the execution part of the trading-bot.
 
- 
+## License
+
+The software is dedicated to the public domain under the Creative Commons Zero (CC0) License.
+
 
 
 
