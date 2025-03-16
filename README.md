@@ -8,7 +8,7 @@
 2. [Setup](#Setup)
 3. [Documentation](#Documentation)
    1. [Dictionaries](#dictionaries)
-   2. [Scripts](#Scripts)
+   2. [Logic](#Logic)
 4. [Usage](#Usage)
 5. [License](#license)
 
@@ -109,7 +109,7 @@ This contains the dirctionaries which contains all variables that are needed wit
 
 ------------------------------------------------------------------------------------------------
 
-### Scripts
+### Logic
 
 ### getData/getData.py:
 
