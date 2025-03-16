@@ -38,6 +38,7 @@ clone the repository and install the required components
 
 <code> $ pip install -r requirements.txt </code>
 
+<code> $ python3 algoTrade.py BTC-USD </code>
 ## Documentation
 
 ### shared/sharedDict.py:
