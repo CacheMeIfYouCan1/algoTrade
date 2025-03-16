@@ -65,18 +65,6 @@ def algo_trade(market_data_dict, order_book_dict, value_relations_dict):
 			print("difference between oracle and calculated price: ", value_relations_dict['oracle_calculated_price_difference'])
 			print("difference between ask and bid sizes: ", value_relations_dict['ask_bid_size_factor'])
 
-			print("order side: ", order_management_dict['order_side'])
-			print("order price: ", order_management_dict['order_price'])
-			print("order size: ", order_management_dict['order_size'])
-			print("order status: ", order_management_dict['order_status'])
-			print("order id: ", order_management_dict['order_id'])
-
-			print("close order side: ", order_management_dict['close_order_side'])
-			print("close order price: ", order_management_dict['close_order_price'])
-			print("close order size: ", order_management_dict['close_order_size'])
-			print("close order status: ", order_management_dict['close_order_status'])
-			print("close order id: ", order_management_dict['close_order_id'])
-
 			time.sleep(2.5) # sleep 2.5 secs for better readability of output
 			
 
