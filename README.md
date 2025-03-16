@@ -11,7 +11,7 @@
    2. [Logic](#Logic)
 4. [Usage](#Usage)
 5. [License](#license)
-6. [Addendum][#Addendum]
+6. [Addendum](#Addendum)
 
 ## Introduction
 
