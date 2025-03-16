@@ -1,12 +1,28 @@
 # algoTrade
 
 
+
+## Table of Contents
+
+1. [Introduction](#Introduction)
+2. [Setup](#Setup)
+3. [Documentation](#Documentation)
+   1. [Dictionaries](#dictionaries)
+   2. [Scripts](#Scripts)
+4. [Usage](#Usage)
+5. [License](#license)
+
+## Introduction
+
 <p><strong>Please note that this project is not a complete trading bot! The provided scripts are only a base foundation, which gathers all necessary data, 
  to build a profitable trading bot. The strategy which was built on top of this foundation will not be disclosed.</strong></p>
 
  
 
 This documentation is made for Debian based systems
+
+
+
 
 ## Setup
 
@@ -41,6 +57,8 @@ clone the repository and install the required components
 now the project is set up 
 
 ## Documentation
+
+### Dictionaries
 
 ### shared/sharedDict.py:
 
@@ -90,6 +108,8 @@ This contains the dirctionaries which contains all variables that are needed wit
 
 
 ------------------------------------------------------------------------------------------------
+
+### scripts
 
 ### getData/getData.py:
 
