@@ -11,7 +11,7 @@ import time
 from collections import deque
 import multiprocessing
 
-from getData.getData import get_data
+from getData.getData import GetData
 from shared.sharedDict import market_data_dict, value_relations_dict, order_book_dict
 
 getcontext().prec = 20
@@ -26,7 +26,7 @@ def run_async_task(async_func, shared_dict):
 
 def algo_trade(market_data_dict, order_book_dict, value_relations_dict):
 
-	get_data_instance = get_data()
+	get_data_instance = GetData()
 	
 	process_get_market_data = multiprocessing.Process(target=run_async_task, args=(get_data_instance.get_market_data, market_data_dict))
 	process_get_order_data = multiprocessing.Process(target=run_async_task, args=(get_data_instance.get_order_data, order_book_dict))
